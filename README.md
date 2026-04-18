@@ -1,201 +1,189 @@
 # 🛡️ RedShadow V4 — Red Team Reconnaissance Framework
 
-**RedShadow V4** is a professional-grade red team automation framework for passive and active reconnaissance, secret discovery, CVE analysis, and report generation. Built for bug bounty hunters and penetration testers, it runs a full 14-stage recon pipeline from a single command — or each stage individually.
+**RedShadow V4** is a professional red team reconnaissance framework built in Python. It runs a full multi-stage recon pipeline from a single command — covering port scanning, passive HTTP recon, secret detection, cloud storage analysis, CVE correlation, and automated report generation.
 
 > ⚠️ For educational and lawful use only. Always obtain explicit written authorisation before scanning any target. See `LICENSE.txt` for full terms.
 
 ---
 
-## 🚀 What's New in V4
+## 🚀 Key Features
 
-Every module has been rewritten from scratch with major capability upgrades:
-
-| Area | What changed |
-|---|---|
-| **DNS Bruteforce** | Deep wildcard detection, IPv6 fallback, thread-local resolvers, real retry logic, rich JSON output with CNAME targets |
-| **Probe** | 100+ probes across 9 categories, content verification, CORS preflight testing, cookie security audit, confidence scoring, proof fields |
-| **Secret Scanner** | Shannon entropy checking, 30+ patterns, word-boundary false positive filtering, per-finding confidence |
-| **S3 Scanner** | GCP + Azure bucket support, regional S3 endpoints, opt-in write test |
-| **JS Extractor** | Source map scanning, inline script scanning, GraphQL introspection detection, subdomain leakage, parameter extraction |
-| **CVE Analysis** | Version-aware filtering, EPSS enrichment, attack surface tagging (RCE/SQLi/SSRF etc.), risk scoring per target |
-| **NVD Lookup** | Multi-strategy search (CPE → keyword+version → keyword), 40+ CPE mappings, version-aware cache, richer output |
-| **GitHub Scanner** | 30 queries, retry on rate limit, GCP/Azure patterns, progress counter |
-| **Wayback** | 5-source URL collection, IDOR detection, tech fingerprinting, secret scanning in responses |
-| **Takeover** | 40 services, multi-fingerprint per service, NXDOMAIN detection, CONFIRMED/LIKELY/POTENTIAL confidence |
-| **Pipeline** | Resume support (checksum-validated), parallel stages, per-stage weighted ETA, findings-aware summary |
-| **Report** | HTML injection fix, EPSS column, attack surface badges, CORS/GraphQL/leaked subdomain sections, risk-sorted CVE table |
-
----
-
-## 📦 Full Feature List
+**Two pipeline modes:**
+- **Domain mode** — 15-stage pipeline from subdomain enumeration through to CVE analysis and report
+- **IP mode** — 10-stage pipeline for raw IPs and CIDR ranges with no domain dependency
 
 **Reconnaissance**
-- Subdomain enumeration via `crt.sh` (certificate transparency)
-- DNS bruteforce with deep wildcard detection and company-name permutations
+- Subdomain enumeration via certificate transparency (crt.sh)
+- DNS bruteforce with deep wildcard detection and permutation generation
 - Passive HTTP recon — headers, title, tech stack, IP resolution
-- Wayback Machine scanning — 5 sources, secret detection in responses, IDOR tagging
+- Wayback Machine scanning with secret detection in archived responses
 
 **Vulnerability Detection**
-- 100+ active HTTP probes — exposed files, admin panels, Spring Boot actuators, debug endpoints
+- 100+ active HTTP probes — exposed files, admin panels, debug endpoints, actuators
 - CORS misconfiguration detection (GET + OPTIONS preflight)
 - Cookie security audit (HttpOnly, Secure, SameSite)
-- Open redirect detection — header-based and meta refresh
-- Subdomain takeover detection — 40 services, content-verified
-- S3/GCS/Azure bucket discovery and misconfiguration detection
+- Open redirect detection
+- Subdomain takeover detection across 40 services
+- S3, GCS, and Azure blob container discovery and misconfiguration detection
 - GraphQL introspection detection
-- Source map and inline script endpoint extraction
 
 **Secret Discovery**
-- JavaScript and HTML secret scanning — AWS keys, GitHub tokens, Stripe, database URLs, JWTs, and 30+ more
-- GitHub public repository secret scanning — 30 targeted queries
-- Shannon entropy validation — filters placeholder values, keeps real secrets
+- JavaScript and HTML secret scanning — AWS keys, GitHub tokens, Stripe, JWTs, database URLs, and 30+ patterns
+- Shannon entropy validation to filter placeholder values
+- GitHub public repository secret scanning with 30 targeted queries
 
-**CVE & Risk Analysis**
-- Nmap port scanning with service/version detection
-- NVD API v2 lookup with CPE-based precision search
-- EPSS exploitation probability enrichment
-- Attack surface tagging — RCE, Auth Bypass, SQLi, SSRF, XXE, Path Traversal, and more
-- Version-aware CVE filtering — only CVEs affecting the detected version
-- Composite risk scoring per target (CVSS × EPSS weighted)
+**CVE and Risk Analysis**
+- Nmap port scanning with service and version detection
+- NVD API v2 lookup with CPE-based precision search and multi-strategy fallback
+- EPSS exploitation probability enrichment per CVE
+- HTTP fingerprint enrichment — Server headers and response bodies feed version detection
+- Version-aware CVE filtering with CONFIRMED / POSSIBLY AFFECTED / UNLIKELY classification
+- Context flags for agent-forwarding-only CVEs and non-default component requirements
+- Backport risk warnings for Ubuntu/Debian/RHEL packages
+- Composite risk scoring per target
+
+**Correlation Engine**
+- 13 detection rules across 4 tiers — from confirmed secrets to recon leads
+- 5 chain patterns for multi-stage attack path detection
+- Type-specific narratives explaining how signals connect
+- Ranked leads with confidence levels (HIGH / MEDIUM / LOW)
 
 **Reporting**
-- Dark-themed HTML report with 16 summary stat boxes
-- Risk-sorted CVE table with EPSS column, attack surface badges, CWE IDs
-- Separate probe sections for vulnerabilities, recon findings, and hardening gaps
-- Confidence badges on every finding (CONFIRMED / LIKELY / POTENTIAL)
+- Dark-themed HTML report with executive summary and ranked priority actions
+- Version-matched CVE table with EPSS, version relevance badges, and context flags
+- Correlated leads with narratives and collapsible validation checklists
+- Hardening gaps in collapsed section — vulnerabilities surface first
+- Markdown report generated alongside HTML
+
+**Engineering**
+- 58 unit tests across 4 test files
+- Deep JSON schema validation for all stage outputs
+- Structured per-run logging to `outputs/logs/`
+- Run quality score (0-100) across 5 dimensions
+- Resume support with checksum validation
+- Parallel stage execution with weighted ETA
 
 ---
 
-## 🛠️ Requirements
+## 🛠️ Installation
 
 ```bash
-sudo apt update
-sudo apt install nmap python3-venv -y
-```
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+sudo apt update && sudo apt install nmap -y
+pip install -r requirements.txt --break-system-packages
 ```
 
 Or use the setup script:
 
 ```bash
-chmod +x setup.sh
-./setup.sh
+chmod +x setup.sh && ./setup.sh
 ```
 
-**Optional API keys** (add to `.env` for best results):
+**API keys** — add to `.env` in the project root:
 
 ```env
 NVD_API_KEY=your_key_here       # https://nvd.nist.gov/developers/request-an-api-key
-GITHUB_TOKEN=your_token_here    # https://github.com/settings/tokens (no scopes needed)
+GITHUB_TOKEN=your_token_here    # https://github.com/settings/tokens
 ```
+
+Without an NVD key: 5 requests per 30 seconds. With one: 50 requests per 30 seconds.
 
 ---
 
 ## 🚀 Usage
 
-### ⚡ Auto Mode — Full 14-Stage Pipeline
+### IP Mode
 
 ```bash
-sudo venv/bin/python3 main.py auto --target hackerone.com
+# Triage scan — skips redirect and S3 (~70% faster, recommended first pass)
+sudo python3 main.py scan-ips --ips 192.168.1.1 --triage
+
+# Deep scan — all stages
+sudo python3 main.py scan-ips --ips 192.168.1.1 --deep
+
+# Multiple IPs
+sudo python3 main.py scan-ips --ips 10.0.0.1,10.0.0.2,10.0.0.3 --triage
+
+# Specific ports only (stay within authorised scope)
+sudo python3 main.py scan-ips --ips 10.0.0.1 --deep --ports 443,8080,8443
+
+# CIDR range
+sudo python3 main.py scan-ips --ips 10.0.0.0/24 --triage
+
+# From a targets file
+sudo python3 main.py scan-ips --targets targets.txt --deep
+
+# Custom output directory
+sudo python3 main.py scan-ips --ips 10.0.0.1 --triage --output-dir outputs/my_scan
 ```
 
-**All flags:**
+### Domain Mode
 
 ```bash
---output-dir  custom_folder          # Output directory (default: outputs/)
---wordlist    /path/to/wordlist.txt  # Custom DNS wordlist
---no-bruteforce                      # Skip DNS bruteforce
---insecure                           # Disable TLS verification
---verbose                            # Show detailed error output
---resume                             # Resume from last completed stage
+# Full 15-stage pipeline
+sudo python3 main.py auto --target example.com
+
+# Resume an interrupted scan
+sudo python3 main.py auto --target example.com --resume
+
+# Skip DNS bruteforce
+sudo python3 main.py auto --target example.com --no-bruteforce
 ```
 
-> `sudo` is required for Nmap SYN scanning (`-sS`). Without sudo, set `nmap_args: "-sT"` in `config.yaml`.
+### IP Mode Flags
 
-**Resume a crashed scan:**
+| Flag | Description |
+|---|---|
+| `--triage` / `--fast` | Skip redirect and S3 scanning (~70% faster) |
+| `--deep` | Run all stages including redirect and S3 |
+| `--ports` | Comma-separated port list — overrides config.yaml |
+| `--output-dir` | Custom output directory |
+| `--debug` | Enable verbose debug logging |
+| `--quiet` | Suppress non-essential output |
+| `--resume` | Resume from last completed stage |
+| `--format` | Output format: `all`, `html`, `md`, `json` |
+| `--threads` | Override thread count for scanning stages |
+| `--timeout` | Override HTTP timeout in seconds |
+
+### Run Tests
+
 ```bash
-sudo venv/bin/python3 main.py auto --target hackerone.com --resume
-```
-
----
-
-### 🔧 Manual Mode — Run Any Stage Individually
-
-```bash
-# Subdomain enumeration
-python3 main.py domain --target hackerone.com
-
-# DNS bruteforce
-python3 main.py bruteforce --target hackerone.com --wordlist /path/to/list.txt
-
-# Passive recon
-python3 main.py passive --input outputs/subdomains.txt
-
-# HTTP probing (100+ checks)
-python3 main.py probe --input outputs/passive_results.json
-
-# Subdomain takeover (40 services)
-python3 main.py takeover --input outputs/subdomains.txt
-
-# Secret scanner
-python3 main.py secret --input outputs/passive_results.json
-
-# S3/GCS/Azure bucket scanner
-python3 main.py s3 --target hackerone.com
-
-# JavaScript endpoint extractor
-python3 main.py js --input outputs/passive_results.json
-
-# Wayback Machine scanner
-python3 main.py wayback --target hackerone.com
-
-# GitHub secret scanner
-python3 main.py github --target hackerone.com
-
-# Open redirect detection
-python3 main.py redirect --input outputs/passive_results.json
-
-# Port scan (Nmap)
-sudo venv/bin/python3 main.py scan --input outputs/subdomains.txt
-
-# CVE analysis with EPSS enrichment
-python3 main.py analyse --input outputs/scan_results.json
-
-# Generate full report
-python3 main.py report --input outputs/analysis_results.json --html outputs/report.html
-
-# NVD cache management
-python3 main.py cache --stats
-python3 main.py cache --clear
-python3 main.py cache --purge
+python3 -m pytest tests/ -v
 ```
 
 ---
 
 ## 🗺️ Pipeline Stages
 
-| # | Stage | Depends On | Parallel |
-|---|---|---|---|
-| 1 | Subdomain Enumeration (crt.sh) | — | — |
-| 2 | DNS Bruteforce | — | — |
-| 3 | Subdomain Takeover Check | subdomains.txt | — |
-| 4 | Passive Recon | subdomains.txt | — |
-| 5 | HTTP Probing | passive_results.json | ✅ with 6/7/9 |
-| 6 | Open Redirect Detection | passive_results.json | ✅ with 5/7/9 |
-| 7 | Secret Scanner | passive_results.json | ✅ with 5/6/9 |
-| 8 | S3 Bucket Scanner | target only | ✅ with 10/11 |
-| 9 | JS Endpoint Extractor | passive_results.json | ✅ with 5/6/7 |
-| 10 | Wayback Machine Scanner | target only | ✅ with 8/11 |
-| 11 | GitHub Secret Scanner | target only | ✅ with 8/10 |
-| 12 | Port Scan (Nmap) | subdomains.txt | — |
-| 13 | CVE Analysis | scan_results.json | — |
-| 14 | Report Generation | all outputs | — |
+### IP Mode (10 stages)
 
-Stages marked ✅ run in parallel threads, saving significant scan time.
+| # | Stage | Notes |
+|---|---|---|
+| 1 | Port Scan (Nmap) | Scans specified ports with service detection |
+| 2 | Passive HTTP Recon | Probes all open ports for HTTP/HTTPS services |
+| 3 | HTTP Probing | 100+ path probes, CORS, cookie audit |
+| 4 | Secret Scanner | Scans HTTP responses for credentials |
+| 5 | JS Extractor | Endpoint and subdomain extraction from JS |
+| 6 | Open Redirect | Skipped in `--triage` mode |
+| 7 | S3 Bucket Scanner | Skipped in `--triage` mode |
+| 8 | CVE Analysis | NVD lookup with HTTP fingerprint enrichment |
+| 9 | Correlation Engine | 13 rules, 5 chain patterns, ranked leads |
+| 10 | Report Generation | HTML + Markdown with executive summary |
+
+### Domain Mode (15 stages)
+
+| # | Stage |
+|---|---|
+| 1 | Subdomain Enumeration (crt.sh) |
+| 2 | DNS Bruteforce |
+| 3 | Subdomain Takeover Check |
+| 4 | Passive HTTP Recon |
+| 5–9 | HTTP Probing, Redirect, Secrets, S3, JS (parallel) |
+| 10 | Wayback Machine Scanner |
+| 11 | GitHub Secret Scanner |
+| 12 | Port Scan (Nmap) |
+| 13 | CVE Analysis |
+| 14 | Correlation Engine |
+| 15 | Report Generation |
 
 ---
 
@@ -203,61 +191,43 @@ Stages marked ✅ run in parallel threads, saving significant scan time.
 
 ```
 RedShadow_V4/
-├── .gitignore
-├── LICENSE.txt
-├── README.md
-├── SECURITY.md
-├── config.yaml
-├── main.py
+├── main.py                   ← Entry point and CLI
+├── config.yaml               ← All settings
+├── .env                      ← API keys (never committed)
 ├── requirements.txt
 ├── setup.sh
 ├── data/
-│   ├── cve_map.json          ← local CVE fallback map
-│   └── nvd_cache/            ← auto-generated NVD response cache
+│   ├── cve_map.json          ← Local CVE fallback map (64 products, 113 CVEs)
+│   └── nvd_cache/            ← Auto-generated NVD response cache
 ├── modules/
-│   ├── __init__.py
-│   ├── analyse.py            ← CVE analysis + EPSS + risk scoring
+│   ├── analyse.py            ← CVE analysis, EPSS enrichment, risk scoring
 │   ├── bruteforce.py         ← DNS bruteforce with wildcard detection
+│   ├── correlate.py          ← Correlation engine — 13 rules, 5 chain patterns
 │   ├── domain.py             ← crt.sh subdomain enumeration
 │   ├── githubscan.py         ← GitHub secret scanner
-│   ├── jsextractor.py        ← JS endpoint + source map extractor
+│   ├── jsextractor.py        ← JS endpoint and source map extractor
+│   ├── logger.py             ← Structured per-run logging
+│   ├── matchers.py           ← Product normalisation and CVE precision helpers
 │   ├── nvd.py                ← NVD API v2 with CPE-based lookup
 │   ├── passive.py            ← Passive HTTP recon
-│   ├── pipeline.py           ← 14-stage orchestrator with resume
+│   ├── pipeline.py           ← Domain mode 15-stage orchestrator
+│   ├── pipeline_ip.py        ← IP mode 10-stage orchestrator
 │   ├── probe.py              ← 100+ active HTTP probes
 │   ├── redirect.py           ← Open redirect detection
-│   ├── report.py             ← HTML + Markdown report generator
-│   ├── s3scanner.py          ← S3/GCS/Azure bucket scanner
+│   ├── report.py             ← HTML and Markdown report generator
+│   ├── s3scanner.py          ← S3, GCS, and Azure bucket scanner
 │   ├── scan.py               ← Nmap port scanner
-│   ├── secret.py             ← Secret + credential scanner
+│   ├── schemas.py            ← JSON schema validation for stage outputs
+│   ├── secret.py             ← Secret and credential scanner
 │   ├── takeover.py           ← Subdomain takeover detection
 │   ├── utils.py              ← Thread-safe config loader
 │   └── wayback.py            ← Wayback Machine scanner
-└── outputs/                  ← all scan results written here
-```
-
----
-
-## ⚙️ Configuration
-
-All settings live in `config.yaml`. Key options:
-
-```yaml
-s3scanner:
-  enable_write_check: false   # set true ONLY in a lab — writes a test file to verify bucket write access
-
-githubscan:
-  token: ""                   # GitHub token for higher rate limits (10 → 50 req/min)
-
-pipeline:
-  resume: false               # set true to always resume interrupted scans
-  skip_bruteforce: false
-```
-
-Add API keys to `.env`:
-```env
-NVD_API_KEY=...
-GITHUB_TOKEN=...
+├── tests/
+│   ├── test_matchers.py      ← Normalisation and CVE precision tests
+│   ├── test_pipeline_ip_parsers.py
+│   ├── test_schemas.py       ← Schema validation tests
+│   └── test_validators.py    ← IP/CIDR/domain validation tests
+└── outputs/                  ← All scan results written here (git-ignored)
 ```
 
 ---
@@ -266,28 +236,48 @@ GITHUB_TOKEN=...
 
 | File | Contents |
 |---|---|
-| `subdomains.txt` | Discovered subdomains (one per line) |
-| `subdomains_dns.json` | Rich DNS data — IP, record type, CNAME targets |
-| `passive_results.json` | HTTP status, title, tech stack per subdomain |
-| `probe_results.json` | Active probe findings with confidence and proof |
-| `takeover_results.json` | Takeover candidates with CONFIRMED/LIKELY/POTENTIAL |
-| `secret_results.json` | Exposed credentials with entropy scores |
-| `s3_results.json` | Public/private cloud buckets (AWS/GCP/Azure) |
-| `js_results.json` | Endpoints, GraphQL introspection, leaked subdomains |
-| `wayback_results.json` | Live archived URLs, secrets found in responses |
-| `github_results.json` | Leaked credentials in public repositories |
-| `redirect_results.json` | Confirmed open redirects |
 | `scan_results.json` | Nmap port scan results with service versions |
-| `analysis_results.json` | CVEs with EPSS, attack surface, risk scores |
-| `redshadow_report.md` | Markdown report |
+| `passive_results.json` | HTTP status, title, tech stack per host |
+| `probe_results.json` | Active probe findings with confidence and proof |
+| `secret_results.json` | Exposed credentials with entropy scores |
+| `js_results.json` | Endpoints, GraphQL, leaked subdomains |
+| `s3_results.json` | Public/private cloud buckets (AWS/GCP/Azure) |
+| `analysis_results.json` | CVEs with EPSS, version relevance, risk scores |
+| `attack_paths.json` | Correlated leads ranked by confidence and score |
 | `redshadow_report.html` | Dark-themed HTML report — open in any browser |
+| `redshadow_report.md` | Markdown report |
+| `logs/run_<timestamp>.log` | Structured JSON-lines run log |
 
 ---
 
-## 📌 License
+## ⚙️ Configuration
+
+All settings live in `config.yaml`. Key options:
+
+```yaml
+scan:
+  nmap_ports: "443,8080,8443,..."   # Default port list (overridden by --ports flag)
+
+cve_quality:
+  max_per_service: 15               # Cap CVEs shown per service
+  min_cvss: 4.0                     # Minimum CVSS score
+
+ip_mode:
+  triage_by_default: true           # Recommend --triage for IP scans
+
+s3scanner:
+  enable_write_check: false         # Set true ONLY in a lab environment
+
+correlation:
+  min_confidence: LOW               # Minimum confidence level for leads
+```
+
+---
+
+## 📌 Legal
 
 Copyright © 2026 Galal Noaman. All rights reserved.
 
-For educational and non-commercial use only. Not permitted for commercial use, redistribution, or use against systems without explicit authorisation. See `LICENSE.txt` for full terms.
+For educational and non-commercial use only. Not permitted for commercial use, redistribution, or use against systems without explicit written authorisation. See `LICENSE.txt` for full terms.
 
 Contact: Jalalnoaman@gmail.com | GitHub: github.com/GalalNoaman/RedShadow_V4
