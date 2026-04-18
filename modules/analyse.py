@@ -3,6 +3,7 @@
 # Do not copy, redistribute, or resell without written permission.
 
 # RedShadow_v4/modules/analyse.py
+# CVE analysis engine — v2
 
 #   - Expanded product normalization (50+ mappings)
 #   - Version-aware CVE filtering (semver comparison)
