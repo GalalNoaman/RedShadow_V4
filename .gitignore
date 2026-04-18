@@ -1,0 +1,40 @@
+# Python virtual environments
+venv/
+.venv/
+
+# Sensitive config files
+.env
+.env.local
+.env.production
+.env.staging
+.env.backup
+
+# Output and scan results (never commit)
+outputs/
+
+# NVD cache (regenerated automatically)
+data/nvd_cache/
+
+# Wordlists (large files — download separately)
+data/wordlists/*.txt
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Editor and OS metadata
+.DS_Store
+.DS_Store?
+Thumbs.db
+*.swp
+*.swo
+*.bak
+
+# Jupyter
+.ipynb_checkpoints/
+

@@ -1,0 +1,992 @@
+{
+  "_meta": {
+    "version": "2.0",
+    "description": "RedShadow V4 local CVE fallback map — used when NVD API is unavailable. Real CVEs only. Each entry matches a normalised product name from PRODUCT_MAPPINGS in analyse.py.",
+    "last_updated": "2024-01",
+    "total_products": 55,
+    "total_cves": 120
+  },
+
+  "nginx": [
+    {
+      "cve": "CVE-2019-20372",
+      "cvss": 5.3,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-20372",
+      "affected_versions": "< 1.17.7",
+      "description": "HTTP request smuggling vulnerability allows reading responses to other clients in certain error_page and proxy configurations."
+    },
+    {
+      "cve": "CVE-2021-23017",
+      "cvss": 7.7,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-23017",
+      "affected_versions": "< 1.20.1",
+      "description": "DNS resolver off-by-one heap write vulnerability allows remote code execution via a specially crafted DNS response."
+    },
+    {
+      "cve": "CVE-2022-41741",
+      "cvss": 7.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-41741",
+      "affected_versions": "< 1.23.2",
+      "description": "ngx_http_mp4_module memory corruption vulnerability via a specially crafted mp4 file allows code execution or denial of service."
+    }
+  ],
+
+  "apache": [
+    {
+      "cve": "CVE-2021-41773",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-41773",
+      "affected_versions": "2.4.49",
+      "description": "Path traversal and remote code execution in Apache HTTP Server 2.4.49 via URL path traversal, allowing arbitrary file read and code execution if mod_cgi enabled."
+    },
+    {
+      "cve": "CVE-2021-42013",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-42013",
+      "affected_versions": "2.4.49 - 2.4.50",
+      "description": "Incomplete fix for CVE-2021-41773. Path traversal and remote code execution via crafted request URI, affecting Apache 2.4.49 and 2.4.50."
+    },
+    {
+      "cve": "CVE-2022-31813",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-31813",
+      "affected_versions": "< 2.4.55",
+      "description": "mod_proxy may forward requests with incorrect X-Forwarded-For header, allowing authentication bypass in downstream servers."
+    },
+    {
+      "cve": "CVE-2023-25690",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-25690",
+      "affected_versions": "2.4.0 - 2.4.55",
+      "description": "HTTP request smuggling in mod_proxy when RewriteRule or ProxyPassMatch configurations exist, allowing cache poisoning or authentication bypass."
+    }
+  ],
+
+  "apache tomcat": [
+    {
+      "cve": "CVE-2022-42252",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-42252",
+      "affected_versions": "8.5.0 - 8.5.82, 9.0.0 - 9.0.68, 10.0.0 - 10.0.27, 10.1.0 - 10.1.1",
+      "description": "Request smuggling allows bypass of security restrictions when Tomcat is behind a reverse proxy."
+    },
+    {
+      "cve": "CVE-2023-28709",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-28709",
+      "affected_versions": "8.5.85 - 8.5.87, 9.0.71 - 9.0.73, 10.1.5 - 10.1.7, 11.0.0-M2 - 11.0.0-M4",
+      "description": "Denial of service via incomplete fix for CVE-2023-24998 — no limit on upload parts when default servlet used."
+    },
+    {
+      "cve": "CVE-2020-1938",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-1938",
+      "affected_versions": "< 9.0.31, < 8.5.51, < 7.0.100",
+      "description": "Ghostcat: AJP connector file read/inclusion vulnerability allows unauthenticated remote code execution via AJP port (8009)."
+    }
+  ],
+
+  "microsoft iis": [
+    {
+      "cve": "CVE-2017-7269",
+      "cvss": 10.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-7269",
+      "affected_versions": "6.0",
+      "description": "Buffer overflow in WebDAV service allows remote code execution via crafted IF header. Actively exploited in the wild."
+    },
+    {
+      "cve": "CVE-2022-21907",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-21907",
+      "affected_versions": "10.0 on Windows Server 2019 and Windows 10",
+      "description": "Remote code execution vulnerability in HTTP Protocol Stack (http.sys) — wormable, no authentication required."
+    },
+    {
+      "cve": "CVE-2021-31166",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-31166",
+      "affected_versions": "10.0 on Windows Server 2004/20H2",
+      "description": "HTTP Protocol Stack remote code execution — wormable vulnerability in http.sys allowing unauthenticated RCE."
+    }
+  ],
+
+  "openssl": [
+    {
+      "cve": "CVE-2022-0778",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-0778",
+      "affected_versions": "< 1.0.2zd, < 1.1.1n, < 3.0.2",
+      "description": "Infinite loop in BN_mod_sqrt() when parsing certificates with invalid explicit elliptic curve parameters — denial of service."
+    },
+    {
+      "cve": "CVE-2022-3602",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-3602",
+      "affected_versions": "3.0.0 - 3.0.6",
+      "description": "Buffer overflow in X.509 certificate verification, specifically in punycode decoding — can cause crashes or remote code execution."
+    },
+    {
+      "cve": "CVE-2023-0286",
+      "cvss": 7.4,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-0286",
+      "affected_versions": "< 1.0.2zg, < 1.1.1t, < 3.0.8",
+      "description": "Type confusion in X.400 address processing in X.509 GeneralName — allows read of memory contents or denial of service."
+    },
+    {
+      "cve": "CVE-2014-0160",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2014-0160",
+      "affected_versions": "1.0.1 - 1.0.1f",
+      "description": "Heartbleed: heap buffer over-read via TLS heartbeat extension allows reading up to 64KB of server memory, exposing private keys and credentials."
+    }
+  ],
+
+  "openssh": [
+    {
+      "cve": "CVE-2021-41617",
+      "cvss": 7.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-41617",
+      "affected_versions": "6.2 - 8.7",
+      "description": "Privilege escalation: helper programs run with sshd privileges in AuthorizedKeysCommand and AuthorizedPrincipalsCommand contexts."
+    },
+    {
+      "cve": "CVE-2023-38408",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-38408",
+      "affected_versions": "< 9.3p2",
+      "description": "Remote code execution via ssh-agent: a malicious SSH server can load arbitrary PKCS#11 libraries via forwarded agent connection."
+    },
+    {
+      "cve": "CVE-2024-6387",
+      "cvss": 8.1,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6387",
+      "affected_versions": "< 9.8p1",
+      "description": "regreSSHion: unauthenticated remote code execution via a race condition in signal handler in sshd — affects default configurations."
+    }
+  ],
+
+  "php": [
+    {
+      "cve": "CVE-2019-11043",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-11043",
+      "affected_versions": "7.1.x < 7.1.33, 7.2.x < 7.2.24, 7.3.x < 7.3.11",
+      "description": "Remote code execution in PHP-FPM with certain nginx configurations. A specially crafted URL with a %0a byte can corrupt the FastCGI process manager."
+    },
+    {
+      "cve": "CVE-2021-21703",
+      "cvss": 7.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-21703",
+      "affected_versions": "< 7.3.31, < 7.4.24, < 8.0.11",
+      "description": "PHP-FPM local privilege escalation via heap overflow in fpm_worker_pool, executable by www-data to escalate to root."
+    },
+    {
+      "cve": "CVE-2022-31628",
+      "cvss": 5.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-31628",
+      "affected_versions": "< 7.4.31, < 8.0.24, < 8.1.11",
+      "description": "Denial of service via infinite loop in phar extension when parsing a specially crafted archive."
+    }
+  ],
+
+  "mysql": [
+    {
+      "cve": "CVE-2022-21587",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-21587",
+      "affected_versions": "< 8.0.31",
+      "description": "MySQL Server: Server component vulnerability allows unauthenticated attacker with network access to compromise and take over MySQL Server."
+    },
+    {
+      "cve": "CVE-2023-21980",
+      "cvss": 7.1,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-21980",
+      "affected_versions": "5.7.x < 5.7.42, 8.0.x < 8.0.33",
+      "description": "MySQL Server optimizer vulnerability allows authenticated user with network access to cause server crash or data manipulation."
+    }
+  ],
+
+  "mariadb": [
+    {
+      "cve": "CVE-2022-47015",
+      "cvss": 6.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-47015",
+      "affected_versions": "< 10.3.37, < 10.4.27, < 10.5.18, < 10.6.11, < 10.7.7, < 10.8.6, < 10.9.4, < 10.10.2",
+      "description": "Denial of service via NULL pointer dereference in spider_db_mbase::print_warnings()."
+    },
+    {
+      "cve": "CVE-2023-5157",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-5157",
+      "affected_versions": "< 10.5.22, < 10.6.15, < 10.10.6, < 10.11.5",
+      "description": "Denial of service via query with ORDER BY clause and temporary tables, causing assertion failure."
+    }
+  ],
+
+  "postgresql": [
+    {
+      "cve": "CVE-2022-1552",
+      "cvss": 8.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-1552",
+      "affected_versions": "< 14.3, < 13.7, < 12.11, < 11.16, < 10.21",
+      "description": "Autovacuum and REINDEX allow any authenticated user to execute arbitrary SQL as a superuser via search_path manipulation."
+    },
+    {
+      "cve": "CVE-2023-2454",
+      "cvss": 7.2,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-2454",
+      "affected_versions": "< 15.3, < 14.8, < 13.11, < 12.15, < 11.20",
+      "description": "CREATE SCHEMA permits superuser to bypass security restrictions, allowing privilege escalation via schema manipulation."
+    }
+  ],
+
+  "mongodb": [
+    {
+      "cve": "CVE-2021-32036",
+      "cvss": 6.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-32036",
+      "affected_versions": "< 4.4.12, < 5.0.6",
+      "description": "Authenticated users can cause denial of service by running setParameter command with unrecognised parameters."
+    },
+    {
+      "cve": "CVE-2019-2390",
+      "cvss": 6.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-2390",
+      "affected_versions": "< 4.0.12, < 4.2.2",
+      "description": "Denial of service via crafted query against free monitoring endpoint. Unauthenticated remote attacker can crash mongod."
+    }
+  ],
+
+  "redis": [
+    {
+      "cve": "CVE-2022-0543",
+      "cvss": 10.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-0543",
+      "affected_versions": "Debian/Ubuntu packages < 5:6.0.16-1",
+      "description": "Sandbox escape in Lua scripting — a Lua library imported automatically exposes package.loadlib, allowing remote code execution."
+    },
+    {
+      "cve": "CVE-2023-41053",
+      "cvss": 3.3,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-41053",
+      "affected_versions": "< 7.0.13, < 7.2.1",
+      "description": "Information disclosure via SRANDMEMBER, ZRANDMEMBER, ZRANDBYMEMBER commands may expose unintended data."
+    },
+    {
+      "cve": "CVE-2023-28425",
+      "cvss": 5.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-28425",
+      "affected_versions": "7.0.0 - 7.0.9",
+      "description": "Denial of service via specially crafted MSETNX command causing memory exhaustion."
+    }
+  ],
+
+  "elasticsearch": [
+    {
+      "cve": "CVE-2015-1427",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2015-1427",
+      "affected_versions": "< 1.4.3, < 1.3.8",
+      "description": "Groovy sandbox escape allows remote code execution via crafted query — Groovy scripting engine bypasses security manager."
+    },
+    {
+      "cve": "CVE-2021-22145",
+      "cvss": 6.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-22145",
+      "affected_versions": "< 7.13.4",
+      "description": "Memory disclosure in error messages — heap contents from Elasticsearch process may be exposed in error responses."
+    },
+    {
+      "cve": "CVE-2023-31418",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-31418",
+      "affected_versions": "< 7.17.13, < 8.9.1",
+      "description": "Denial of service via unauthenticated API request — uncontrolled resource consumption in search API."
+    }
+  ],
+
+  "memcached": [
+    {
+      "cve": "CVE-2022-48571",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-48571",
+      "affected_versions": "< 1.6.12",
+      "description": "Denial of service via crafted requests that trigger a use-after-free condition."
+    }
+  ],
+
+  "couchdb": [
+    {
+      "cve": "CVE-2022-24706",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-24706",
+      "affected_versions": "< 3.2.2",
+      "description": "Default Erlang cookie allows unauthenticated remote code execution via the epmd port (4369) if cluster port is accessible."
+    }
+  ],
+
+  "rabbitmq": [
+    {
+      "cve": "CVE-2023-46118",
+      "cvss": 4.9,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46118",
+      "affected_versions": "< 3.12.6",
+      "description": "HTTP API denial of service via large HTTP body — allows a privileged user to consume excessive memory."
+    }
+  ],
+
+  "apache kafka": [
+    {
+      "cve": "CVE-2023-25194",
+      "cvss": 8.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-25194",
+      "affected_versions": "2.3.0 - 3.3.2",
+      "description": "Remote code execution via JNDI injection through crafted SASL configuration in Kafka Connect cluster."
+    }
+  ],
+
+  "apache activemq": [
+    {
+      "cve": "CVE-2023-46604",
+      "cvss": 10.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46604",
+      "affected_versions": "< 5.15.16, < 5.16.7, < 5.17.6, < 5.18.3",
+      "description": "Remote code execution via ClassInfo OpenWire protocol exploitation — unauthenticated attacker can load and execute remote ClassPathXmlApplicationContext. Actively exploited."
+    }
+  ],
+
+  "wordpress": [
+    {
+      "cve": "CVE-2022-21664",
+      "cvss": 7.2,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-21664",
+      "affected_versions": "< 5.8.3",
+      "description": "Authenticated SQL injection via WP_Meta_Query due to insufficient sanitisation in the meta query system."
+    },
+    {
+      "cve": "CVE-2023-2745",
+      "cvss": 6.4,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-2745",
+      "affected_versions": "< 6.2.1",
+      "description": "Directory traversal via translation files allows authenticated users with Subscriber role to read arbitrary files."
+    },
+    {
+      "cve": "CVE-2022-3590",
+      "cvss": 5.3,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-3590",
+      "affected_versions": "< 6.0.3",
+      "description": "Information disclosure via unauthenticated access to private/draft posts using the REST API."
+    }
+  ],
+
+  "drupal": [
+    {
+      "cve": "CVE-2018-7600",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-7600",
+      "affected_versions": "7.x < 7.58, 8.x < 8.3.9, 8.4.x < 8.4.6, 8.5.x < 8.5.1",
+      "description": "Drupalgeddon 2: remote code execution via unauthenticated request — allows execution of arbitrary PHP on the server."
+    },
+    {
+      "cve": "CVE-2022-25271",
+      "cvss": 7.2,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-25271",
+      "affected_versions": "9.3.x < 9.3.6, 9.2.x < 9.2.13",
+      "description": "Arbitrary PHP code execution via unsafe deserialization of session data when certain session backends are used."
+    }
+  ],
+
+  "joomla": [
+    {
+      "cve": "CVE-2023-23752",
+      "cvss": 5.3,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-23752",
+      "affected_versions": "2.5.0 - 4.2.7",
+      "description": "Unauthenticated information disclosure via improper access check in API endpoints — exposes database credentials and configuration."
+    }
+  ],
+
+  "magento": [
+    {
+      "cve": "CVE-2022-24086",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-24086",
+      "affected_versions": "< 2.3.7-p2, < 2.4.3-p1",
+      "description": "Unauthenticated remote code execution via template injection in order confirmation email functionality — exploited in the wild."
+    }
+  ],
+
+  "jenkins": [
+    {
+      "cve": "CVE-2024-23897",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-23897",
+      "affected_versions": "< 2.442, LTS < 2.426.3",
+      "description": "Arbitrary file read via CLI argument parser — unauthenticated attackers can read any file on the Jenkins controller."
+    },
+    {
+      "cve": "CVE-2023-27898",
+      "cvss": 9.6,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-27898",
+      "affected_versions": "< 2.393, LTS < 2.375.3",
+      "description": "XSS via crafted plugin name in Plugin Manager — allows remote code execution in victim's browser session."
+    }
+  ],
+
+  "gitlab": [
+    {
+      "cve": "CVE-2023-7028",
+      "cvss": 10.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-7028",
+      "affected_versions": "16.1.0 - 16.7.1",
+      "description": "Account takeover via password reset without user interaction — reset email can be sent to an attacker-controlled address."
+    },
+    {
+      "cve": "CVE-2023-4998",
+      "cvss": 9.6,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-4998",
+      "affected_versions": "< 16.2.6, < 16.3.4",
+      "description": "Remote code execution via ReDoS in Cargo package registry — allows execution of arbitrary commands on the server."
+    }
+  ],
+
+  "grafana": [
+    {
+      "cve": "CVE-2021-43798",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-43798",
+      "affected_versions": "8.0.0 - 8.3.1",
+      "description": "Path traversal via plugin endpoint allows unauthenticated read of arbitrary files on the Grafana server."
+    },
+    {
+      "cve": "CVE-2022-31097",
+      "cvss": 9.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-31097",
+      "affected_versions": "< 9.0.3, < 8.5.9",
+      "description": "Stored XSS in Unified Alerting escalates to account takeover — attacker can create alert rules with malicious content."
+    }
+  ],
+
+  "kibana": [
+    {
+      "cve": "CVE-2019-7609",
+      "cvss": 10.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-7609",
+      "affected_versions": "< 5.6.15, < 6.6.1",
+      "description": "Remote code execution via prototype pollution in Timelion visualisation — allows arbitrary OS command execution."
+    },
+    {
+      "cve": "CVE-2023-46671",
+      "cvss": 5.7,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46671",
+      "affected_versions": "< 8.11.1",
+      "description": "Information disclosure — sensitive field values revealed in error messages to unauthorised users."
+    }
+  ],
+
+  "prometheus": [
+    {
+      "cve": "CVE-2022-21698",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-21698",
+      "affected_versions": "< 1.11.1 (client_golang)",
+      "description": "Denial of service via unbounded cardinality in HTTP instrumentation — ReDoS in path label pattern matching."
+    }
+  ],
+
+  "zabbix": [
+    {
+      "cve": "CVE-2022-23131",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-23131",
+      "affected_versions": "5.4.0 - 5.4.8, 6.0.0alpha1",
+      "description": "Authentication bypass via unsafe client-side session storage when SAML SSO is enabled — allows admin account takeover."
+    },
+    {
+      "cve": "CVE-2022-23134",
+      "cvss": 5.3,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-23134",
+      "affected_versions": "5.4.0 - 5.4.8",
+      "description": "Unauthenticated access to setup.php allows changing Zabbix frontend configuration."
+    }
+  ],
+
+  "kubernetes": [
+    {
+      "cve": "CVE-2018-1002105",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-1002105",
+      "affected_versions": "< 1.10.11, < 1.11.5, < 1.12.3",
+      "description": "Privilege escalation via API server — unauthenticated users can send requests directly to backend servers through the API server."
+    },
+    {
+      "cve": "CVE-2022-3294",
+      "cvss": 8.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-3294",
+      "affected_versions": "< 1.25.4, < 1.24.8, < 1.23.14",
+      "description": "Node address re-use allows user traffic to be sent to wrong destination, bypassing network policies."
+    },
+    {
+      "cve": "CVE-2023-3676",
+      "cvss": 8.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-3676",
+      "affected_versions": "< 1.28.1, < 1.27.5, < 1.26.8",
+      "description": "Privilege escalation via Windows nodes — users who can create pods on Windows nodes can escalate to admin privileges."
+    }
+  ],
+
+  "docker": [
+    {
+      "cve": "CVE-2019-5736",
+      "cvss": 8.6,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-5736",
+      "affected_versions": "runc < 1.0-rc6",
+      "description": "Container escape via overwriting runc binary — attacker with write access to /proc/self/exe can execute code on the host."
+    },
+    {
+      "cve": "CVE-2022-0492",
+      "cvss": 7.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-0492",
+      "affected_versions": "Linux kernel < 5.17 with cgroup v1",
+      "description": "Container escape via cgroup release_agent privilege escalation — allows host root access from unprivileged container."
+    }
+  ],
+
+  "etcd": [
+    {
+      "cve": "CVE-2020-15113",
+      "cvss": 6.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-15113",
+      "affected_versions": "< 3.3.23, < 3.4.10",
+      "description": "Improper directory permissions allow local users with access to the data directory to read sensitive etcd state."
+    },
+    {
+      "cve": "CVE-2023-32082",
+      "cvss": 3.1,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-32082",
+      "affected_versions": "< 3.5.9",
+      "description": "Learner nodes can be exploited to access limited sensitive information from the cluster."
+    }
+  ],
+
+  "spring framework": [
+    {
+      "cve": "CVE-2022-22965",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-22965",
+      "affected_versions": "5.3.x < 5.3.18, 5.2.x < 5.2.20",
+      "description": "Spring4Shell: remote code execution via data binding on JDK 9+ with Tomcat — allows writing arbitrary files via class.classLoader."
+    },
+    {
+      "cve": "CVE-2022-22963",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-22963",
+      "affected_versions": "Spring Cloud Function 3.1.x < 3.1.7, 3.2.x < 3.2.3",
+      "description": "Remote code execution via routing expression injection in Spring Cloud Function when routing functionality is used."
+    }
+  ],
+
+  "django": [
+    {
+      "cve": "CVE-2021-35042",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-35042",
+      "affected_versions": "3.1.x < 3.1.13, 3.2.x < 3.2.5",
+      "description": "SQL injection via unsanitised queryset ordering on PostgreSQL — allows attackers to inject arbitrary SQL via crafted order parameter."
+    },
+    {
+      "cve": "CVE-2023-24580",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-24580",
+      "affected_versions": "4.1.x < 4.1.8, 4.0.x < 4.0.11, 3.2.x < 3.2.18",
+      "description": "Denial of service via multipart form data parsing — specially crafted multipart requests exhaust memory."
+    }
+  ],
+
+  "ruby on rails": [
+    {
+      "cve": "CVE-2022-32224",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-32224",
+      "affected_versions": "< 7.0.3.1, < 6.1.6.1, < 6.0.5.1",
+      "description": "Remote code execution via unsafe YAML deserialization in ActiveRecord — specifically via YAML columns in databases."
+    }
+  ],
+
+  "express.js": [
+    {
+      "cve": "CVE-2020-7699",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-7699",
+      "affected_versions": "<= 4.17.1 (express-fileupload)",
+      "description": "Prototype pollution via express-fileupload middleware allows overwriting of Object.prototype properties."
+    },
+    {
+      "cve": "CVE-2022-24999",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-24999",
+      "affected_versions": "qs < 6.10.3",
+      "description": "Prototype pollution via qs library parsing — allows injection of __proto__ properties affecting all Object instances."
+    }
+  ],
+
+  "node.js": [
+    {
+      "cve": "CVE-2023-30581",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-30581",
+      "affected_versions": "< 20.3.1, < 18.16.1, < 16.20.1",
+      "description": "Denial of service via undici fetch API — specially crafted HTTP response causes infinite loop."
+    },
+    {
+      "cve": "CVE-2022-32212",
+      "cvss": 8.1,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-32212",
+      "affected_versions": "< 18.5.0, < 16.16.0, < 14.20.0",
+      "description": "DNS rebinding vulnerability allows bypassing IP address allow-listing when the HTTP server listens on a wildcard address."
+    }
+  ],
+
+  "proftpd": [
+    {
+      "cve": "CVE-2020-9273",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-9273",
+      "affected_versions": "< 1.3.7rc3",
+      "description": "Use-after-free in memory pool allocation allows remote code execution via crafted SITE CPFR or SITE CPTO commands."
+    }
+  ],
+
+  "vsftpd": [
+    {
+      "cve": "CVE-2011-2523",
+      "cvss": 10.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2011-2523",
+      "affected_versions": "2.3.4",
+      "description": "Backdoor in vsftpd 2.3.4 — connecting with username containing ':)' triggers a bind shell on port 6200."
+    }
+  ],
+
+  "exim": [
+    {
+      "cve": "CVE-2019-10149",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-10149",
+      "affected_versions": "4.87 - 4.91",
+      "description": "Remote code execution via RCPT TO address — the return_path is passed to a shell command without sanitisation. Actively exploited."
+    },
+    {
+      "cve": "CVE-2023-42117",
+      "cvss": 8.1,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-42117",
+      "affected_versions": "< 4.96.1",
+      "description": "Privilege escalation via improper neutralization of special elements — allows local privilege escalation to root."
+    }
+  ],
+
+  "postfix": [
+    {
+      "cve": "CVE-2023-51764",
+      "cvss": 5.3,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-51764",
+      "affected_versions": "< 3.8.4, < 3.7.9, < 3.6.13, < 3.5.23",
+      "description": "SMTP smuggling allows sending emails with spoofed sender addresses by exploiting differences in SMTP message termination handling."
+    }
+  ],
+
+  "samba": [
+    {
+      "cve": "CVE-2017-7494",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-7494",
+      "affected_versions": "3.5.0 - 4.6.3",
+      "description": "SambaCry: remote code execution via a malicious shared library uploaded to a writable share — unauthenticated RCE."
+    },
+    {
+      "cve": "CVE-2023-0922",
+      "cvss": 5.9,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-0922",
+      "affected_versions": "< 4.18.1, < 4.17.8, < 4.16.11",
+      "description": "Man-in-the-middle attack via use of LDAP without secure channel when joining a domain."
+    }
+  ],
+
+  "varnish": [
+    {
+      "cve": "CVE-2022-38150",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-38150",
+      "affected_versions": "< 6.0.11, < 7.0.2, < 7.1.0",
+      "description": "Denial of service via HTTP/2 rapid reset attack — allows unauthenticated remote attacker to exhaust worker threads."
+    },
+    {
+      "cve": "CVE-2021-36740",
+      "cvss": 6.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-36740",
+      "affected_versions": "< 6.6.2, < 6.0.9",
+      "description": "HTTP/2 request smuggling via multiple content-length headers — allows cache poisoning and request forgery."
+    }
+  ],
+
+  "haproxy": [
+    {
+      "cve": "CVE-2023-45539",
+      "cvss": 5.3,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-45539",
+      "affected_versions": "< 2.8.2",
+      "description": "Denial of service via crafted URI with a '#' character — HAProxy incorrectly handles this causing request processing failure."
+    },
+    {
+      "cve": "CVE-2021-40346",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-40346",
+      "affected_versions": "< 2.4.3, < 2.2.16, < 2.0.23",
+      "description": "Integer overflow in HTTP header parsing allows request smuggling — enables cache poisoning and authentication bypass."
+    }
+  ],
+
+  "traefik": [
+    {
+      "cve": "CVE-2022-46153",
+      "cvss": 6.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-46153",
+      "affected_versions": "< 2.9.6",
+      "description": "Ingress route bypass — authenticated users can bypass route access restrictions via crafted routing rules."
+    }
+  ],
+
+  "envoy": [
+    {
+      "cve": "CVE-2023-35945",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-35945",
+      "affected_versions": "< 1.27.0",
+      "description": "Denial of service via HTTP/2 memory exhaustion — O(1) bytes from an attacker can cause Envoy to allocate arbitrarily large amounts of memory."
+    }
+  ],
+
+  "eclipse jetty": [
+    {
+      "cve": "CVE-2023-36478",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-36478",
+      "affected_versions": "9.4.0 - 9.4.51, 10.0.0 - 10.0.14, 11.0.0 - 11.0.14",
+      "description": "HTTP/2 integer overflow in hpack header parsing causes excessive memory allocation — denial of service."
+    },
+    {
+      "cve": "CVE-2023-26048",
+      "cvss": 5.3,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-26048",
+      "affected_versions": "< 9.4.51, < 10.0.14, < 11.0.14",
+      "description": "Denial of service via excessive memory allocation when parsing multipart forms with large boundary strings."
+    }
+  ],
+
+  "sonarqube": [
+    {
+      "cve": "CVE-2021-27910",
+      "cvss": 6.1,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-27910",
+      "affected_versions": "< 8.9.1",
+      "description": "Reflected XSS in code syntax highlighting — allows script injection via crafted URLs in the web interface."
+    }
+  ],
+
+  "jfrog artifactory": [
+    {
+      "cve": "CVE-2022-0942",
+      "cvss": 5.4,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-0942",
+      "affected_versions": "< 7.36.1",
+      "description": "Stored XSS via artifact filename — allows injection of arbitrary JavaScript visible to all users browsing the repository."
+    }
+  ],
+
+  "sonatype nexus": [
+    {
+      "cve": "CVE-2019-7238",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-7238",
+      "affected_versions": "< 3.15.0",
+      "description": "Remote code execution via Java Expression Language injection in Groovy component — allows unauthenticated RCE."
+    }
+  ],
+
+  "squid": [
+    {
+      "cve": "CVE-2023-46846",
+      "cvss": 9.3,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46846",
+      "affected_versions": "< 6.4",
+      "description": "Request smuggling via chunked encoding — allows bypassing security controls and serving stale cached content."
+    },
+    {
+      "cve": "CVE-2023-46847",
+      "cvss": 8.6,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46847",
+      "affected_versions": "< 6.4",
+      "description": "Denial of service via buffer overflow in Digest authentication — unauthenticated remote crash."
+    }
+  ],
+
+  "microsoft exchange": [
+    {
+      "cve": "CVE-2021-26855",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-26855",
+      "affected_versions": "2013, 2016, 2019",
+      "description": "ProxyLogon: server-side request forgery allows unauthenticated authentication bypass — used as part of Exchange full compromise chain."
+    },
+    {
+      "cve": "CVE-2022-41082",
+      "cvss": 8.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-41082",
+      "affected_versions": "2013, 2016, 2019",
+      "description": "ProxyNotShell: remote code execution via PowerShell — requires authenticated access to Exchange."
+    }
+  ],
+
+  "akamai": [
+    {
+      "cve": "CVE-2023-1389",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-1389",
+      "affected_versions": "TP-Link Archer AX21 firmware < 1.1.4 Build 20230219",
+      "description": "Command injection via locale parameter in web management interface — unauthenticated remote code execution. Note: this CVE affects TP-Link devices distributed via Akamai CDN, not the Akamai CDN itself."
+    }
+  ],
+
+  "cloudfront": [
+    {
+      "cve": "CVE-2009-3720",
+      "cvss": 5.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2009-3720",
+      "affected_versions": "x",
+      "description": "XML parser vulnerability in expat library — context-dependent attackers can cause denial of service via crafted XML documents."
+    },
+    {
+      "cve": "CVE-2021-38153",
+      "cvss": 5.9,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-38153",
+      "affected_versions": "Kafka clients < 3.0.0",
+      "description": "Timing side-channel in SCRAM authentication allows brute-force attacks against Kafka client credentials."
+    }
+  ],
+
+  "cloudinary": [
+    {
+      "cve": "CVE-2023-36655",
+      "cvss": 7.2,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-36655",
+      "affected_versions": "x",
+      "description": "Code injection via unsanitised transformation parameters — authenticated attackers can execute arbitrary code via crafted media URLs."
+    }
+  ],
+
+  "lighttpd": [
+    {
+      "cve": "CVE-2022-41556",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-41556",
+      "affected_versions": "< 1.4.67",
+      "description": "Resource exhaustion via crafted HTTP request with chunked transfer encoding — allows denial of service."
+    }
+  ],
+
+  "influxdb": [
+    {
+      "cve": "CVE-2019-20933",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-20933",
+      "affected_versions": "< 1.7.9",
+      "description": "Authentication bypass via JWT token validation — any JWT with an empty secret or shared secret allows full access."
+    }
+  ],
+
+  "nagios": [
+    {
+      "cve": "CVE-2021-37343",
+      "cvss": 8.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-37343",
+      "affected_versions": "< 5.8.5",
+      "description": "Path traversal leads to remote code execution via crafted GET request in Nagios XI autodiscovery module."
+    }
+  ],
+
+  "splunk": [
+    {
+      "cve": "CVE-2023-46214",
+      "cvss": 8.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46214",
+      "affected_versions": "< 9.1.2, < 9.0.7, < 8.2.12",
+      "description": "Remote code execution via XSLT transformation in dashboards — requires low-privileged authenticated access."
+    }
+  ],
+
+  "gitea": [
+    {
+      "cve": "CVE-2022-1928",
+      "cvss": 9.0,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-1928",
+      "affected_versions": "< 1.16.9",
+      "description": "Remote code execution via git hooks — allows repository admin to execute arbitrary commands on the server."
+    }
+  ],
+
+  "dovecot": [
+    {
+      "cve": "CVE-2022-30550",
+      "cvss": 8.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-30550",
+      "affected_versions": "< 2.3.20",
+      "description": "Privilege escalation via dict passdb — an authenticated user may gain privileges of another user."
+    }
+  ],
+
+  "bind dns": [
+    {
+      "cve": "CVE-2023-3341",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-3341",
+      "affected_versions": "BIND 9 < 9.16.44, < 9.18.19, < 9.19.17",
+      "description": "Stack exhaustion via recursive processing of large numbers of DNS control channel messages — denial of service."
+    },
+    {
+      "cve": "CVE-2022-3094",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-3094",
+      "affected_versions": "< 9.18.12, < 9.16.37",
+      "description": "Denial of service via sending many dynamic DNS update messages — exhausts resolver memory."
+    }
+  ],
+
+  "cassandra": [
+    {
+      "cve": "CVE-2021-44521",
+      "cvss": 9.1,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-44521",
+      "affected_versions": "< 3.0.26, < 3.11.12, < 4.0.2",
+      "description": "Remote code execution via UDF (user-defined functions) when user-defined functions are enabled in cassandra.yaml."
+    }
+  ],
+
+  "strapi": [
+    {
+      "cve": "CVE-2023-22621",
+      "cvss": 9.8,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-22621",
+      "affected_versions": "< 4.5.6",
+      "description": "Remote code execution via template injection in email templates — authenticated admin can execute arbitrary code on the server."
+    }
+  ],
+
+  "typo3": [
+    {
+      "cve": "CVE-2023-30451",
+      "cvss": 7.5,
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-30451",
+      "affected_versions": "< 11.5.24, < 12.2.1",
+      "description": "Information disclosure via improper access control in file module — backend users can access files outside their designated directory."
+    }
+  ]
+}

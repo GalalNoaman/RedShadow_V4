@@ -1,0 +1,153 @@
+# ─── RedShadow V4 Configuration File ───
+# Developed by Galal Noaman – RedShadow_V4
+# For educational and lawful use only.
+
+domain:
+  timeout: 20
+  retries: 3
+  delay: 2
+  headers:
+    User-Agent: "RedShadowBot/4.0 (+https://github.com/GalalNoaman/RedShadow_V4)"
+
+bruteforce:
+  threads: 30
+  dns_servers:
+    - "8.8.8.8"
+    - "1.1.1.1"
+    - "9.9.9.9"
+  timeout: 2
+  wordlist: null
+
+scan:
+  # Port range covers:
+  #   - Standard services (FTP, SSH, SMTP, DNS, HTTP, HTTPS)
+  #   - Common dev/API ports (3000, 4000, 5000, 8000-8999 range)
+  #   - Common management ports (9000, 9090, 9200, 9300)
+  #   - Azure-common ports seen in the wild (7999, 10001, 10002, 20000)
+  #   - Database ports (1433, 1521, 3306, 5432, 5984, 6379, 9042, 27017)
+  #   - Message broker ports (5671, 5672, 15672, 61613, 61616)
+  #   - Admin/monitoring ports (179, 2375, 2376, 4243, 4848, 8161)
+  #   - Kubernetes/container ports (6443, 10250, 10255, 30000-32767 sampled)
+  #   DO NOT add IP addresses here — IPs are passed via --ips or --targets flag
+  nmap_ports: "21-25,53,79-81,88,110,111,119,135,139,143,179,389,443,445,465,587,631,636,873,993,995,1080,1194,1433,1521,2049,2375,2376,3000,3306,3389,4000,4243,4369,4443,4848,5000,5432,5671,5672,5900,5984,6000,6379,6443,7000,7001,7077,7199,7443,7999,8000,8008,8009,8080,8081,8082,8083,8085,8086,8088,8090,8161,8181,8443,8444,8500,8600,8888,8983,9000,9001,9042,9090,9092,9093,9200,9300,9418,9999,10000,10001,10002,10250,10255,11211,15672,20000,27017,27018,28017,50000,50070,61613,61616"
+  nmap_args: "-sS -sV -T4 -Pn -n --version-intensity 7"
+  max_threads: 12
+  dns_servers:
+    - "8.8.8.8"
+    - "1.1.1.1"
+    - "9.9.9.9"
+    - "208.67.222.222"
+
+passive:
+  verify_ssl: false
+  delay: 0.5
+
+probe:
+  threads: 10
+  timeout: 8
+  delay: 0.3
+
+takeover:
+  threads: 20
+  timeout: 8
+
+redirect:
+  threads: 10
+  timeout: 3
+  delay: 0.0
+  # max_paths: cap the number of paths tested per host (reduces scan time significantly)
+  # max_params: cap parameters tested per path
+  # Set lower values for faster scans; increase for deeper testing
+  max_paths: 12         # default: test top 12 redirect-prone paths (was unlimited)
+  max_params: 20        # default: test top 20 parameters (was 38)
+  skip_on_ip_triage: true  # always skip in --triage mode
+
+secret:
+  threads: 10
+  timeout: 8
+
+# ── S3 Scanner ──
+# enable_write_check: set to true ONLY in a lab environment.
+# When true, the scanner will attempt a PUT request to verify write access.
+# Leave false in all other cases to avoid unintended writes to real buckets.
+s3scanner:
+  threads: 20
+  timeout: 8
+  enable_write_check: false
+
+jsextractor:
+  threads: 10
+  timeout: 8
+
+wayback:
+  threads: 10
+  timeout: 10
+
+# ── GitHub Scanner ──
+# Add your GitHub personal access token here for higher rate limits.
+# Without a token: 10 requests/min (very slow — ~3 min per scan).
+# With a token:    50 requests/min (much faster).
+# Generate one at: https://github.com/settings/tokens (no scopes needed for public search)
+githubscan:
+  timeout: 10
+  token: ""
+
+# ── NVD CVE Lookup ──
+# Add your NVD API key for higher rate limits (50 req/30s vs 5 req/30s).
+# Get a free key at: https://nvd.nist.gov/developers/request-an-api-key
+# You can also set NVD_API_KEY in your .env file instead.
+nvd:
+  cache_expiry_hours: 24   # hours before cached CVE results are refreshed
+  max_results: 30          # max CVEs fetched per product from NVD API
+
+analyse:
+  cve_source: "data/cve_map.json"
+  deduplicate: true
+
+report:
+  include_cvss: true
+  include_links: true
+  theme: "dark"
+
+# ── Pipeline ──
+# resume: if true, stages with valid output files are skipped (checksum-validated).
+# skip_bruteforce: skips DNS bruteforce stage entirely.
+# stop_on_empty: aborts pipeline if no subdomains are found after stage 1+2.
+pipeline:
+  skip_bruteforce: false
+  stop_on_empty: true
+  verbose: false
+  resume: false
+
+# ── IP Mode ──
+# triage: recommended for first-pass IP scanning.
+#   Skips: open redirect (slow, ~4min per host), S3 scanning (slow, ~3min per run)
+#   Keeps: port scan, passive recon, HTTP probe, secret scan, JS extraction,
+#          CVE analysis, correlation, report
+# deep: set to true to run all stages including redirect and S3
+# Use triage for quick assessment, deep for thorough investigation.
+ip_mode:
+  triage_by_default: true    # recommend --triage for IP work
+  skip_redirect: false       # overridden by --triage flag
+  skip_s3: false             # overridden by --triage flag
+
+# ── Correlation ──
+# min_confidence: minimum confidence level to include in final report
+#   Options: LOW, MEDIUM, HIGH
+# rce_min_epss: minimum EPSS score for RCE_CANDIDATE leads (filters noise)
+correlation:
+  min_confidence: LOW
+  rce_min_epss: 0.0
+
+# ── CVE Quality ──
+# min_cvss: minimum CVSS score to include in output (0.0 = all)
+# min_epss: minimum EPSS score to include (0.0 = all)
+# max_per_service: cap CVEs shown per service in report
+cve_quality:
+  min_cvss: 4.0
+  min_epss: 0.0
+  max_per_service: 20
+
+defaults:
+  output_dir: "outputs"
+  debug: false

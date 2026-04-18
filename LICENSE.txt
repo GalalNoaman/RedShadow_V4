@@ -1,0 +1,86 @@
+Copyright © 2026 Galal Noaman. All rights reserved.
+
+RedShadow V4 — Red Team Reconnaissance & CVE Analysis Framework
+Contact : Jalalnoaman@gmail.com
+GitHub  : github.com/GalalNoaman/RedShadow_V4
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LICENSE & USAGE TERMS
+
+This software is provided for educational and lawful use only.
+
+You are NOT permitted to:
+
+  - Use this code or any part of it for commercial purposes
+  - Modify, rebrand, or redistribute it publicly without written permission
+  - Sell or sublicense the code in any form
+  - Remove author credit or project branding
+  - Use this tool against systems you do not own or have explicit
+    written permission to test
+  - Integrate this tool or its modules into commercial products or
+    services without prior written authorisation from the author
+
+You MAY:
+
+  - Use the code for personal study and non-commercial research
+  - Run it privately in controlled, ethical, and legal environments
+  - Share it with your university or for academic assessment purposes
+  - Fork it privately for personal learning
+  - Use it within authorised bug bounty programmes where you hold
+    a valid scope agreement with the target organisation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SCOPE & AUTHORISATION
+
+RedShadow V4 performs active and passive reconnaissance including:
+
+  - Subdomain enumeration and DNS bruteforce
+  - Port scanning via Nmap
+  - HTTP probing and vulnerability detection
+  - Secret and credential scanning
+  - S3, GCS, and Azure bucket discovery
+  - JavaScript endpoint extraction
+  - Open redirect detection
+  - Subdomain takeover detection
+  - Wayback Machine URL analysis
+  - GitHub secret scanning
+  - CVE analysis with NVD and EPSS enrichment
+
+Every capability in this tool has the potential to generate network
+traffic directed at the target. You must hold explicit written
+authorisation from the target system owner before running any scan.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DISCLAIMER
+
+This software is provided "as is", without any warranty of any kind,
+express or implied, including but not limited to warranties of
+merchantability, fitness for a particular purpose, or non-infringement.
+
+The author accepts no liability for:
+
+  - Misuse of this tool against systems without authorisation
+  - Any damage, data loss, or service disruption caused by its use
+  - Legal consequences resulting from unlawful use
+  - Actions taken by third parties using this code
+
+This tool is intended for:
+
+  - Bug bounty hunting on authorised programmes with a valid scope
+  - Penetration testing with explicit written permission from the client
+  - Academic research and personal skill development in safe lab environments
+  - Security professionals conducting authorised assessments
+
+Unauthorised use of this tool against any system without explicit written
+permission from the system owner is illegal under computer crime laws in
+most jurisdictions, including but not limited to the UK Computer Misuse
+Act, the US Computer Fraud and Abuse Act, and equivalent legislation
+worldwide.
+
+Always obtain proper authorisation before scanning any target.
+The author is not responsible for how this tool is used.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

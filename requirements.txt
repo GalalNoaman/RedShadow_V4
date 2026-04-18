@@ -1,0 +1,29 @@
+# RedShadow V4 — Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# ── HTTP Client ──
+httpx[http2]          # async-capable HTTP client used across all modules
+
+# ── Terminal UI ──
+tqdm                  # progress bars
+termcolor             # coloured terminal output
+
+# ── DNS ──
+dnspython             # DNS resolution, A/AAAA/CNAME lookups
+
+# ── Port Scanning ──
+python-nmap           # Nmap Python wrapper (requires nmap installed: apt install nmap)
+
+# ── Config & Environment ──
+PyYAML                # config.yaml parsing
+python-dotenv         # .env file loading (NVD_API_KEY, GITHUB_TOKEN)
+
+# ── HTML Parsing ──
+beautifulsoup4        # JS URL extraction, inline script scanning, tech detection
+lxml                  # fast HTML parser backend for BeautifulSoup
+
+# ── HTTP Requests (NVD + EPSS APIs) ──
+requests              # used by nvd.py for NVD and EPSS API calls
+
+# ── Version Comparison ──
+packaging             # semver parsing for version-aware CVE filtering
