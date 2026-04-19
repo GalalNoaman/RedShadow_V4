@@ -1,8 +1,18 @@
 # 🛡️ RedShadow V4 — Red Team Reconnaissance Framework
 
-**RedShadow V4** is a professional red team reconnaissance framework built in Python. It runs a full multi-stage recon pipeline from a single command — covering port scanning, passive HTTP recon, secret detection, cloud storage analysis, CVE correlation, and automated report generation.
+**RedShadow V4** is a red team reconnaissance framework focused on turning raw scan data into **prioritised, actionable intelligence**.
 
-> ⚠️ For educational and lawful use only. Always obtain explicit written authorisation before scanning any target. See `LICENSE.txt` for full terms.
+It combines multi-stage recon with a correlation engine that highlights what actually matters, instead of dumping noisy findings.
+
+> ⚠️ For authorised security testing and educational use only. Do not use against systems without explicit written permission. See `LICENSE.txt` for full terms.
+
+---
+
+## 🖼️ Sample Report
+
+> Open `outputs/redshadow_report.html` in any browser after a scan. No server needed.
+
+The report includes an auto-generated executive summary, ranked priority actions, correlated leads with attack narratives, and a version-matched CVE table — all in a dark-themed HTML format.
 
 ---
 
@@ -43,17 +53,22 @@
 - Composite risk scoring per target
 
 **Correlation Engine**
+
+This is the core of V4.
+
+Instead of listing findings, the engine connects signals across modules — CVE, HTTP, secrets, cloud — and produces ranked leads with clear attack narratives and validation steps.
+
 - 13 detection rules across 4 tiers — from confirmed secrets to recon leads
 - 5 chain patterns for multi-stage attack path detection
 - Type-specific narratives explaining how signals connect
 - Ranked leads with confidence levels (HIGH / MEDIUM / LOW)
 
 **Reporting**
-- Dark-themed HTML report with executive summary and ranked priority actions
+- Auto-generated executive summary with ranked priority actions
 - Version-matched CVE table with EPSS, version relevance badges, and context flags
 - Correlated leads with narratives and collapsible validation checklists
 - Hardening gaps in collapsed section — vulnerabilities surface first
-- Markdown report generated alongside HTML
+- HTML and Markdown report generated side by side
 
 **Engineering**
 - 58 unit tests across 4 test files
@@ -69,7 +84,10 @@
 
 ```bash
 sudo apt update && sudo apt install nmap -y
-pip install -r requirements.txt --break-system-packages
+
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
 Or use the setup script:
@@ -103,7 +121,7 @@ sudo python3 main.py scan-ips --ips 192.168.1.1 --deep
 # Multiple IPs
 sudo python3 main.py scan-ips --ips 10.0.0.1,10.0.0.2,10.0.0.3 --triage
 
-# Specific ports only (stay within authorised scope)
+# Specific ports only — stay within authorised scope
 sudo python3 main.py scan-ips --ips 10.0.0.1 --deep --ports 443,8080,8443
 
 # CIDR range
@@ -276,8 +294,7 @@ correlation:
 
 ## 📌 Legal
 
-Copyright © 2026 Galal Noaman. All rights reserved.
-
-For educational and non-commercial use only. Not permitted for commercial use, redistribution, or use against systems without explicit written authorisation. See `LICENSE.txt` for full terms.
+For authorised security testing and educational use only.
+Do not use against systems without explicit written permission.
 
 Contact: Jalalnoaman@gmail.com | GitHub: github.com/GalalNoaman/RedShadow_V4
